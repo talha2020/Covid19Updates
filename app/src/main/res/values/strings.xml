@@ -14,5 +14,7 @@
     <string name="active_num">Active: %s</string>
     <string name="deaths_num">Deaths: %s</string>
     <string name="recovered_num">Recovered: %s</string>
+    <string name="sort">Sort</string>
+    <string name="sort_by">Sort by</string>
 
 </resources>

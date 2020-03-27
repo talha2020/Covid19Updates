@@ -1,14 +1,13 @@
 package com.rapidresponse.covid19.countries
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.rapidresponse.covid19.*
 import com.rapidresponse.covid19.data.Country
 import com.rapidresponse.covid19.data.UIResponse
@@ -18,6 +17,11 @@ import kotlinx.android.synthetic.main.fragment_home.progressBar
 class CountriesFragment : Fragment() {
 
     private lateinit var viewModel: MainActivityViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,8 +75,32 @@ class CountriesFragment : Fragment() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.countries_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.sortOrder -> showSortOptionsDialog()
+        }
+        return super.onOptionsItemSelected(item)
+    }
     private fun launchCountryDetailActivity(country: Country) {
         showError(country.country)
+    }
+
+    private fun showSortOptionsDialog(){
+        val items = arrayOf("Total cases", "Active cases", "Deaths", "Recovered")
+        MaterialAlertDialogBuilder(context)
+            .setTitle(getString(R.string.sort_by))
+            .setSingleChoiceItems(items, viewModel.sortOption){dialog, which ->
+                handleSortOptionSelected(which)
+                dialog.dismiss()
+            }.show()
+    }
+
+    private fun handleSortOptionSelected(which: Int) {
+        viewModel.updateSortOption(which)
     }
 
 }

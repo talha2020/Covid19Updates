@@ -12,8 +12,8 @@ class NovelCovidRepository(private val apiClient: ApiClient) {
         return apiClient.geSummary()
     }
 
-    suspend fun getCountries(): ApiResponse<List<Country>>{
-        return apiClient.getCountries()
+    suspend fun getCountries(sort: String = "cases"): ApiResponse<List<Country>>{
+        return apiClient.getCountries(sort)
     }
 
     suspend fun getNews(): ApiResponse<List<Article>> {

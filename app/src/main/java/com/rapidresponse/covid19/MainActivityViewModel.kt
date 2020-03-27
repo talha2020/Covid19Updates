@@ -24,6 +24,8 @@ class MainActivityViewModel
     private val newsMutableLiveData = MutableLiveData<UIResponse<List<Article>>>()
     val newsLiveData: LiveData<UIResponse<List<Article>>> = newsMutableLiveData
 
+    var sortOption = 0
+
     fun start() {
         getSummary()
         getCountries()
@@ -45,7 +47,7 @@ class MainActivityViewModel
     fun getCountries(){
         countriesMutableLiveData.value = UIResponse.Loading
         viewModelScope.launch {
-            val response = covidRepository.getCountries()
+            val response = covidRepository.getCountries(getSortStringFromOption())
             response.error?.also {
                 countriesMutableLiveData.value = UIResponse.Error(ApiError(code = it.code, message = it.message))
             }?: response.data?.let {
@@ -66,4 +68,17 @@ class MainActivityViewModel
         }
     }
 
+    fun updateSortOption(which: Int) {
+        sortOption = which
+        getCountries()
+    }
+
+    fun getSortStringFromOption(): String {
+        return when(sortOption){
+            1 -> "active"
+            2 -> "deaths"
+            3 -> "recovered"
+            else -> "cases"
+        }
+    }
 }

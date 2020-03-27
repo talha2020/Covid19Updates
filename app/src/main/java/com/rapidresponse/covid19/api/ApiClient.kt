@@ -2,12 +2,14 @@ package com.rapidresponse.covid19.api
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.rapidresponse.covid19.BuildConfig
+import com.rapidresponse.covid19.data.Country
 import com.rapidresponse.covid19.data.Summary
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.features.json.GsonSerializer
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 import okhttp3.logging.HttpLoggingInterceptor
 import java.net.UnknownHostException
 
@@ -32,6 +34,18 @@ class ApiClient {
         val url = ApiEndPoints.SUMMARY
         return try {
             val response = client.get<Summary>(url)
+            ApiResponse(data = response)
+        } catch (ex: Exception){
+            processException(ex)
+        }
+    }
+
+    suspend fun getCountries(sort: String = "cases"): ApiResponse<List<Country>>{
+        val url = ApiEndPoints.COUNTRIES
+        return try {
+            val response = client.get<List<Country>>(url){
+                parameter("sort", sort)
+            }
             ApiResponse(data = response)
         } catch (ex: Exception){
             processException(ex)

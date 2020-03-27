@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingStart="@dimen/activity_horizontal_margin"
-    android:paddingEnd="@dimen/activity_horizontal_margin">
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:paddingTop="?attr/actionBarSize">
 
     <ProgressBar
         android:id="@+id/progressBar"

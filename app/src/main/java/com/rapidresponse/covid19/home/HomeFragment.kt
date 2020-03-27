@@ -11,8 +11,6 @@ import com.rapidresponse.covid19.*
 import com.rapidresponse.covid19.data.Summary
 import com.rapidresponse.covid19.data.UIResponse
 import kotlinx.android.synthetic.main.fragment_home.*
-import java.text.NumberFormat
-import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -53,7 +51,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun setSummaryView(summary: Summary) {
-        NumberFormat.getNumberInstance(Locale.getDefault()).format(summary.cases)
         totalCasesTv.text = summary.formattedCases
         deathsTv.text = summary.formattedDeaths
         recoveredTv.text = summary.formattedRecovered

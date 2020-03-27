@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Covid19Updates</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_countries">Countries</string>
     <string name="title_notifications">Notifications</string>
 
     <string name="invalid_activity">Invalid activity</string>
@@ -9,5 +9,10 @@
     <string name="deaths">Deaths:</string>
     <string name="recovered">Recovered:</string>
     <string name="request_failed_error">Request failed. Make sure you have active network connection.</string>
+
+    <string name="total_num">Total: %s</string>
+    <string name="active_num">Active: %s</string>
+    <string name="deaths_num">Deaths: %s</string>
+    <string name="recovered_num">Recovered: %s</string>
 
 </resources>

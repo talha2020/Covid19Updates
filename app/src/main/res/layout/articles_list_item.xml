@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/articleItemView"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/default_padding"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/articlesTitleTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/title_countries"
+            android:textSize="@dimen/textsize_heading_6"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/articleDateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="total: 100"/>
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

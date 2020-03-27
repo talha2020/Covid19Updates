@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_countries" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.rapidresponse.covid19.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_news"
+        android:name="com.rapidresponse.covid19.news.NewsFragment"
+        android:label="@string/title_news"
+        tools:layout="@layout/fragment_news" />
 </navigation>

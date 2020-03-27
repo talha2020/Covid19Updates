@@ -1,6 +1,8 @@
 package com.rapidresponse.covid19.api
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.prof.rssparser.Article
+import com.prof.rssparser.Parser
 import com.rapidresponse.covid19.BuildConfig
 import com.rapidresponse.covid19.data.Country
 import com.rapidresponse.covid19.data.Summary
@@ -27,7 +29,7 @@ class ApiClient {
         install(JsonFeature) {
             serializer = GsonSerializer()
         }
-        expectSuccess = true
+        expectSuccess = false
     }
 
     suspend fun geSummary(): ApiResponse<Summary>{
@@ -47,6 +49,17 @@ class ApiClient {
                 parameter("sort", sort)
             }
             ApiResponse(data = response)
+        } catch (ex: Exception){
+            processException(ex)
+        }
+    }
+
+    suspend fun getNews(): ApiResponse<List<Article>> {
+        val url = ApiEndPoints.WHO_RSS
+        val parser = Parser()
+        return try {
+            val channel = parser.getChannel(url)
+            ApiResponse(data = channel.articles)
         } catch (ex: Exception){
             processException(ex)
         }

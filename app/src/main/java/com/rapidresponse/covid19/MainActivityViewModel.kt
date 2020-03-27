@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.prof.rssparser.Article
 import com.rapidresponse.covid19.api.ApiError
 import com.rapidresponse.covid19.data.Country
 import com.rapidresponse.covid19.data.Summary
@@ -20,9 +21,13 @@ class MainActivityViewModel
     private val countriesMutableLiveData = MutableLiveData<UIResponse<List<Country>>>()
     val countriesLiveData: LiveData<UIResponse<List<Country>>> = countriesMutableLiveData
 
+    private val newsMutableLiveData = MutableLiveData<UIResponse<List<Article>>>()
+    val newsLiveData: LiveData<UIResponse<List<Article>>> = newsMutableLiveData
+
     fun start() {
         getSummary()
         getCountries()
+        getNews()
     }
 
     fun getSummary(){
@@ -49,5 +54,16 @@ class MainActivityViewModel
         }
     }
 
+    fun getNews(){
+        newsMutableLiveData.value = UIResponse.Loading
+        viewModelScope.launch {
+            val response = covidRepository.getNews()
+            response.error?.also {
+                newsMutableLiveData.value = UIResponse.Error(ApiError(code = it.code, message = it.message))
+            }?: response.data?.let {
+                newsMutableLiveData.value = UIResponse.Data(it)
+            }
+        }
+    }
 
 }

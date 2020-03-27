@@ -2,7 +2,7 @@
     <string name="app_name">Covid19Updates</string>
     <string name="title_home">Home</string>
     <string name="title_countries">Countries</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_news">News</string>
 
     <string name="invalid_activity">Invalid activity</string>
     <string name="total_cases">Total Cases:</string>

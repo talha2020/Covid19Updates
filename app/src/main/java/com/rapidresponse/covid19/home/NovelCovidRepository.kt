@@ -1,5 +1,6 @@
 package com.rapidresponse.covid19.home
 
+import com.prof.rssparser.Article
 import com.rapidresponse.covid19.api.ApiClient
 import com.rapidresponse.covid19.api.ApiResponse
 import com.rapidresponse.covid19.data.Country
@@ -13,6 +14,10 @@ class NovelCovidRepository(private val apiClient: ApiClient) {
 
     suspend fun getCountries(): ApiResponse<List<Country>>{
         return apiClient.getCountries()
+    }
+
+    suspend fun getNews(): ApiResponse<List<Article>> {
+         return apiClient.getNews()
     }
 
 }

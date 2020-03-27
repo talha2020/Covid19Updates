@@ -12,4 +12,7 @@
     <dimen name="textsize_heading_5">24sp</dimen>
     <dimen name="textsize_heading_4">34sp</dimen>
 
+
+    <dimen name="bottom_navigation_bar_height">56dp</dimen>
+
 </resources>

@@ -7,4 +7,6 @@ object ApiEndPoints {
     const val SUMMARY = NOVEL_COVID_HOST + "all"
     const val COUNTRIES = NOVEL_COVID_HOST + "countries"
 
+    const val WHO_RSS = "https://www.who.int/rss-feeds/covid19-news-english.xml"
+
 }

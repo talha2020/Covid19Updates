@@ -2,4 +2,13 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Text sizes taken from here https://material.io/design/typography/the-type-system.html#type-scale -->
+    <dimen name="textsize_overline">10sp</dimen>
+    <dimen name="textsize_caption">12sp</dimen>
+    <dimen name="textsize_normal">16sp</dimen>
+    <dimen name="textsize_heading_6">20sp</dimen>
+    <dimen name="textsize_heading_5">24sp</dimen>
+    <dimen name="textsize_heading_4">34sp</dimen>
+
 </resources>

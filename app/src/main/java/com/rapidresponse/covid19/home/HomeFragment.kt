@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.rapidresponse.covid19.MainActivityViewModel
-import com.rapidresponse.covid19.MainViewModelFactory
-import com.rapidresponse.covid19.R
+import com.rapidresponse.covid19.*
+import com.rapidresponse.covid19.data.Summary
+import com.rapidresponse.covid19.data.UIResponse
+import kotlinx.android.synthetic.main.fragment_home.*
+import java.text.NumberFormat
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -29,7 +30,32 @@ class HomeFragment : Fragment() {
             getString(R.string.invalid_activity)
         )
 
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        return root
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.summaryLiveData.observe(viewLifecycleOwner, Observer { response ->
+            when(response){
+                is UIResponse.Loading -> {
+                    progressBar.show()
+                }
+                is UIResponse.Data<Summary> -> {
+                    progressBar.setGone()
+                    setSummaryView(response.data)
+                }
+                is UIResponse.Error -> {
+                    progressBar.setGone()
+                    onError(response)
+                }
+            }
+        })
+    }
+
+    private fun setSummaryView(summary: Summary) {
+        NumberFormat.getNumberInstance(Locale.getDefault()).format(summary.cases)
+        totalCasesTv.text = summary.formattedCases
+        deathsTv.text = summary.formattedDeaths
+        recoveredTv.text = summary.formattedRecovered
     }
 }

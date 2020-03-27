@@ -10,6 +10,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.rapidresponse.covid19.api.ErrorCodes
 import com.rapidresponse.covid19.data.UIResponse
 
+const val COUNTRY_KEY = "country_key"
+
 fun View.show(){
     this.visibility = View.VISIBLE
 }

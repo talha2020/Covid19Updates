@@ -1,5 +1,6 @@
 package com.rapidresponse.covid19.countries
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -86,7 +87,9 @@ class CountriesFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
     private fun launchCountryDetailActivity(country: Country) {
-        showError(country.country)
+        val intent = Intent(context, CountryDetailActivity::class.java)
+        intent.putExtra(COUNTRY_KEY, country)
+        startActivity(intent)
     }
 
     private fun showSortOptionsDialog(){

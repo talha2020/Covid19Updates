@@ -73,7 +73,7 @@ class MainActivityViewModel
         getCountries()
     }
 
-    fun getSortStringFromOption(): String {
+    private fun getSortStringFromOption(): String {
         return when(sortOption){
             1 -> "active"
             2 -> "deaths"

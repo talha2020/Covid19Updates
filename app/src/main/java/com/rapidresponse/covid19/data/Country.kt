@@ -1,9 +1,12 @@
 package com.rapidresponse.covid19.data
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.text.NumberFormat
 import java.util.*
 
+@Parcelize
 data class Country(
     @SerializedName("country") val country : String,
     @SerializedName("countryInfo") val countryInfo : CountryInfo,
@@ -16,7 +19,7 @@ data class Country(
     @SerializedName("critical") val critical : Long,
     @SerializedName("casesPerOneMillion") val casesPerOneMillion : Double,
     @SerializedName("deathsPerOneMillion") val deathsPerOneMillion : Double
-){
+): Parcelable {
     val formattedTotal: String
         get() = NumberFormat.getNumberInstance(Locale.getDefault()).format(cases)
 
@@ -30,7 +33,7 @@ data class Country(
         get() = NumberFormat.getNumberInstance(Locale.getDefault()).format(recovered)
 }
 
-
+@Parcelize
 data class CountryInfo (
     @SerializedName("_id") val _id : Int,
     @SerializedName("lat") val lat : Double,
@@ -38,4 +41,4 @@ data class CountryInfo (
     @SerializedName("flag") val flag : String,
     @SerializedName("iso3") val iso3 : String,
     @SerializedName("iso2") val iso2 : String
-)
+): Parcelable

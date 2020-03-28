@@ -21,16 +21,29 @@ data class Country(
     @SerializedName("deathsPerOneMillion") val deathsPerOneMillion : Double
 ): Parcelable {
     val formattedTotal: String
-        get() = NumberFormat.getNumberInstance(Locale.getDefault()).format(cases)
+        get() = getFormattedNumber(cases)
 
     val formattedActive: String
-        get() = NumberFormat.getNumberInstance(Locale.getDefault()).format(active)
+        get() = getFormattedNumber(active)
 
     val formattedDeaths: String
-        get() = NumberFormat.getNumberInstance(Locale.getDefault()).format(deaths)
+        get() = getFormattedNumber(deaths)
 
     val formattedRecovered: String
-        get() = NumberFormat.getNumberInstance(Locale.getDefault()).format(recovered)
+        get() = getFormattedNumber(recovered)
+
+    val formattedCasesToday: String
+        get() = getFormattedNumber(todayCases)
+
+    val formattedDeathsToday: String
+        get() = getFormattedNumber(todayDeaths)
+
+    val formattedCritical: String
+        get() = getFormattedNumber(critical)
+
+    private fun getFormattedNumber(number: Long): String {
+        return NumberFormat.getNumberInstance(Locale.getDefault()).format(number)
+    }
 }
 
 @Parcelize

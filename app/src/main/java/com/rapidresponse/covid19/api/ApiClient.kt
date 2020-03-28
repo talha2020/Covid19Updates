@@ -5,6 +5,7 @@ import com.prof.rssparser.Article
 import com.prof.rssparser.Parser
 import com.rapidresponse.covid19.BuildConfig
 import com.rapidresponse.covid19.data.Country
+import com.rapidresponse.covid19.data.HistoricalData
 import com.rapidresponse.covid19.data.Summary
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
@@ -48,6 +49,16 @@ class ApiClient {
             val response = client.get<List<Country>>(url){
                 parameter("sort", sort)
             }
+            ApiResponse(data = response)
+        } catch (ex: Exception){
+            processException(ex)
+        }
+    }
+
+    suspend fun getHistoricalData(country: String): ApiResponse<HistoricalData>{
+        val url = ApiEndPoints.COUNTRIES_HISTORICAL + country
+        return try {
+            val response = client.get<HistoricalData>(url)
             ApiResponse(data = response)
         } catch (ex: Exception){
             processException(ex)

@@ -4,6 +4,7 @@ import com.prof.rssparser.Article
 import com.rapidresponse.covid19.api.ApiClient
 import com.rapidresponse.covid19.api.ApiResponse
 import com.rapidresponse.covid19.data.Country
+import com.rapidresponse.covid19.data.HistoricalData
 import com.rapidresponse.covid19.data.Summary
 
 class NovelCovidRepository(private val apiClient: ApiClient) {
@@ -18,6 +19,10 @@ class NovelCovidRepository(private val apiClient: ApiClient) {
 
     suspend fun getNews(): ApiResponse<List<Article>> {
          return apiClient.getNews()
+    }
+
+    suspend fun getHistoricalData(country: String): ApiResponse<HistoricalData> {
+        return apiClient.getHistoricalData(country)
     }
 
 }

@@ -13,6 +13,8 @@ import com.rapidresponse.covid19.*
 import com.rapidresponse.covid19.data.Country
 import com.rapidresponse.covid19.data.UIResponse
 import kotlinx.android.synthetic.main.fragment_countries.*
+import kotlinx.android.synthetic.main.fragment_countries.swipeRefreshLayout
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.progressBar
 
 class CountriesFragment : Fragment() {
@@ -48,14 +50,18 @@ class CountriesFragment : Fragment() {
                 }
                 is UIResponse.Data<List<Country>> -> {
                     progressBar.setGone()
+                    swipeRefreshLayout.isRefreshing = false
                     showCountriesList(response.data)
                 }
                 is UIResponse.Error -> {
                     progressBar.setGone()
+                    swipeRefreshLayout.isRefreshing = false
                     onError(response)
                 }
             }
         })
+
+        swipeRefreshLayout.setOnRefreshListener { viewModel.getCountries() }
     }
 
     private fun showCountriesList(countries: List<Country>) {

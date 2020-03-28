@@ -40,14 +40,18 @@ class HomeFragment : Fragment() {
                 }
                 is UIResponse.Data<Summary> -> {
                     progressBar.setGone()
+                    swipeRefreshLayout.isRefreshing = false
                     setSummaryView(response.data)
                 }
                 is UIResponse.Error -> {
                     progressBar.setGone()
+                    swipeRefreshLayout.isRefreshing = false
                     onError(response)
                 }
             }
         })
+
+        swipeRefreshLayout.setOnRefreshListener { viewModel.getSummary() }
     }
 
     private fun setSummaryView(summary: Summary) {
